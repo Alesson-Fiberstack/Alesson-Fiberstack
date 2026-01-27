@@ -5,31 +5,83 @@ body {
   color: #fff;
 }
 
+/* HERO NETWORK */
 .network-section {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
 
+.network-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: 30vh;
+}
+
 #networkCanvas {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  line-height: 1.2;
+}
+
+.section {
+  margin-top: 80px;
+}
+
+.card {
+  background: #111;
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid #262626;
+}
+
+/* BOTÕES */
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 16px 32px;
+  background: #fff;
+  color: #000;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* SERVIÇOS */
 .services {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  padding: 80px;
+  padding: 60px 0;
 }
 
 .service {
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(0, 153, 255, 0.3);
+  border: 1px solid rgba(0,153,255,0.3);
   padding: 20px;
   border-radius: 12px;
   text-align: center;
@@ -41,13 +93,19 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 0 20px rgba(0,153,255,0.6);
 }
-@media(max-width: 700px) {
+
+/* MOBILE */
+@media (max-width: 700px) {
   .network-section {
     height: auto;
     padding-bottom: 60px;
   }
 
-  .network-services {
-    padding: 40px 20px;
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .network-overlay {
+    padding-top: 20vh;
   }
 }
