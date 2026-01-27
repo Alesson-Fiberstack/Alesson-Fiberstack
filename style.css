@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  background: #0b0f14;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+.network-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#networkCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.services {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 80px;
+}
+
+.service {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0, 153, 255, 0.3);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(0,153,255,0.6);
+}
