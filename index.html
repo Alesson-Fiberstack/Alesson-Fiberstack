@@ -129,10 +129,52 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+  .network-section {
+  position: relative;
+  height: 100vh;
+  background: #0b0b0b;
+  overflow: hidden;
+}
+
+#networkCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.network-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.network-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.network-overlay p {
+  color: #cfcfcf;
+  letter-spacing: 1px;
+}
 </style>
 </head>
 
 <body>
+<section class="network-section">
+  <canvas id="networkCanvas"></canvas>
+
+  <div class="network-overlay">
+    <h1>Infraestrutura e Segurança</h1>
+    <p>Redes • Servidores • Monitoramento • Acesso Remoto</p>
+  </div>
+</section>
 
 <div class="container">
 
