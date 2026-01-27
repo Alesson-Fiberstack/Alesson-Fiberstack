@@ -2,14 +2,15 @@ const canvas = document.getElementById("networkCanvas");
 const ctx = canvas.getContext("2d");
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
 }
 resize();
 window.addEventListener("resize", resize);
 
 const points = [];
-const POINTS = 70;
+const isMobile = window.innerWidth < 768;
+const POINTS = isMobile ? 35 : 70;
 
 for (let i = 0; i < POINTS; i++) {
   points.push({
