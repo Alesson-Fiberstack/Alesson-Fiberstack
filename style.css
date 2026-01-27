@@ -41,3 +41,13 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 0 20px rgba(0,153,255,0.6);
 }
+@media(max-width: 700px) {
+  .network-section {
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .network-services {
+    padding: 40px 20px;
+  }
+}
