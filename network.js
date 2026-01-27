@@ -1,54 +1,60 @@
-const canvas = document.getElementById('networkCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("networkCanvas");
+const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
-let nodes = [];
-const nodeCount = 70;
+const points = [];
+const POINTS = 70;
 
-for (let i = 0; i < nodeCount; i++) {
-  nodes.push({
+for (let i = 0; i < POINTS; i++) {
+  points.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.7,
-    vy: (Math.random() - 0.5) * 0.7
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6
   });
 }
 
-function animate() {
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  nodes.forEach(n => {
-    n.x += n.vx;
-    n.y += n.vy;
+  points.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
 
-    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = "#0099ff";
-    ctx.fill();
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
   });
 
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i; j < nodes.length; j++) {
-      let dx = nodes[i].x - nodes[j].x;
-      let dy = nodes[i].y - nodes[j].y;
-      let dist = Math.sqrt(dx * dx + dy * dy);
+  for (let i = 0; i < points.length; i++) {
+    for (let j = i + 1; j < points.length; j++) {
+      const dx = points[i].x - points[j].x;
+      const dy = points[i].y - points[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < 120) {
+        ctx.strokeStyle = "rgba(255,255,255,0.08)";
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(0,153,255,${1 - dist / 120})`;
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.moveTo(points[i].x, points[i].y);
+        ctx.lineTo(points[j].x, points[j].y);
         ctx.stroke();
       }
     }
   }
 
-  requestAnimationFrame(animate);
+  points.forEach(p => {
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
 }
 
-animate();
+draw();
