@@ -3,6 +3,7 @@ body {
   background: #0b0f14;
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
+  overflow-x: hidden;
 }
 
 /* HERO NETWORK */
@@ -41,7 +42,7 @@ body {
   align-items: center;
 }
 
-.hero h1 {
+.hero h2 {
   line-height: 1.2;
 }
 
@@ -150,6 +151,14 @@ body {
   background: radial-gradient(circle, rgba(0,153,255,0.28), transparent 70%);
   z-index: -1;
 }
+
+.hero,
+.hero-photo,
+.hero-text {
+  position: relative;
+  z-index: 3;
+}
+
 /* animação de entrada da foto */
 .fade-in {
   opacity: 0;
@@ -166,11 +175,56 @@ body {
 }
 
 /* flutuação sutil contínua */
-.hero-photo {
+.hero-float {
   animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+/* FOTO PERFIL CIRCULAR + ANIMAÇÃO */
+.perfil {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: aparecer 1.2s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.network-section {
+  overflow: hidden;
+}
+
+#networkCanvas {
+  pointer-events: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #0099ff;
+  color: #fff;
+}
+
+.service {
+  background: rgba(255,255,255,0.08);
+}
+
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ajuste do glow no mobile */
+@media (max-width: 700px) {
+  .hero-photo::after {
+    width: 300px;
+    height: 300px;
+  }
 }
