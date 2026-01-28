@@ -1,21 +1,34 @@
 const canvas = document.getElementById("networkCanvas");
-const ctx = canvas.getContext("2d");
+if (!canvas) {
+  console.warn("Canvas networkCanvas não encontrado");
+} else {
+  const ctx = canvas.getContext("2d");
+
+  // TODO: todo o resto do código AQUI DENTRO
+}
+
+const isMobile = window.innerWidth < 768;
+const POINTS = isMobile ? 35 : 70;
+const MAX_DIST = isMobile ? 90 : 120;
 
 function resize() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
 }
+
 resize();
 window.addEventListener("resize", resize);
 
 const points = [];
-const isMobile = window.innerWidth < 768;
-const POINTS = isMobile ? 35 : 70;
 
 for (let i = 0; i < POINTS; i++) {
   points.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
+    x: Math.random() * canvas.offsetWidth,
+    y: Math.random() * canvas.offsetHeight,
     vx: (Math.random() - 0.5) * 0.6,
     vy: (Math.random() - 0.5) * 0.6
   });
@@ -28,8 +41,8 @@ function draw() {
     p.x += p.vx;
     p.y += p.vy;
 
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    if (p.x < 0 || p.x > canvas.offsetWidth) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.offsetHeight) p.vy *= -1;
   });
 
   for (let i = 0; i < points.length; i++) {
@@ -38,7 +51,7 @@ function draw() {
       const dy = points[i].y - points[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < 120) {
+      if (dist < MAX_DIST) {
         ctx.strokeStyle = "rgba(255,255,255,0.08)";
         ctx.beginPath();
         ctx.moveTo(points[i].x, points[i].y);
