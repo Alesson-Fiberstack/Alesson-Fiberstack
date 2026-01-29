@@ -23,7 +23,7 @@ img {
   overflow: hidden;
 }
 
-#networkCanvas {
+#networkCanvas3D {
   position: absolute;
   inset: 0;
   width: 100%;
